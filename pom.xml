@@ -5,10 +5,10 @@
 
 	<groupId>com.paulhoang</groupId>
 	<artifactId>rebord-service-discovery</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>rebord-service-discovery</name>
+	<name>reborn-service-discovery</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -18,11 +18,20 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+	<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>tinkerboard-releases</name>
+			<url>http://tinker.paulhoang.com:8081/artifactory/libs-release</url>
+		</repository>
+	</distributionManagement>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>
+		<sat.version>0.5.0</sat.version>
 	</properties>
 
 	<dependencies>
@@ -59,15 +68,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 	<repositories>
 		<repository>
 			<id>spring-snapshots</id>
@@ -86,6 +86,48 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.openhab.tools.sat</groupId>
+				<artifactId>sat-plugin</artifactId>
+				<version>${sat.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>check</id>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.openhab.tools.sat</groupId>
+							<artifactId>sat-plugin</artifactId>
+							<version>${sat.version}</version>
+							<executions>
+								<execution>
+									<phase>verify</phase>
+									<goals>
+										<goal>checkstyle</goal>
+										<goal>pmd</goal>
+										<goal>spotbugs</goal>
+										<goal>report</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
 
 
 </project>
