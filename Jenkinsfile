@@ -44,7 +44,7 @@ node {
           }
        ]
       }"""
-      sh 'mkdir ./downloads'
+      sh 'mkdir -p ./downloads'
       server.download(downloadSpec)
       echo 'Download comeplete'
 
