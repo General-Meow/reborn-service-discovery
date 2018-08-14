@@ -3,12 +3,12 @@
 node {
   echo sh(script: 'env|sort', returnStdout: true)
   checkout scm
-  docker.image('generalmeow/jenkins-tools:1.4-arm')
+  docker.image('generalmeow/jenkins-tools:1.6-arm')
         .inside('-v /home/paul/work/docker/docker-maven-repo:/root/.m2/repository') {
 
     stage ('Initialize') {
-      sh '''
-      '''
+      //sh '''
+      //'''
     }
     stage('Static analysis') {
       echo 'Running static analysis tools..'
@@ -26,33 +26,27 @@ node {
       echo 'Installing artifact locally'
       sh 'mvn install -DskipTests'
     }
-    stage('Deploy jar to artifactory') {
-      echo 'Deploying Jar to Artifactory....'
+    stage('Deploy jar to nexus') {
+      echo 'Deploying Jar to Nexus....'
       sh 'mvn deploy -DskipTests'
     }
     stage('Build and Publish Docker Image') {
-      echo 'downloading artifacts from artifactory....'
+      echo 'downloading artifacts from nexus....'
       pom = readMavenPom file: 'pom.xml'
 
       def pomVersion = pom.version
-      def server = Artifactory.newServer url: 'http://tinker.paulhoang.com:8081/artifactory', credentialsId: 'artifactory'
-      def downloadSpec = """{
-       "files": [
-        {
-            "pattern": "libs-release-local/com/paulhoang/reborn-service-discovery/${pomVersion}/reborn-service-discovery-${pomVersion}.jar",
-            "target": "downloads/app.jar"
-          }
-       ]
-      }"""
+      def projectName = 'reborn-service-discovery'
+
       sh 'mkdir -p ./downloads'
-      server.download(downloadSpec)
+      //server.download(downloadSpec)
+      sh 'curl -o ./downloads/app.jar "http://tinker.paulhoang.com:8081/repository/maven-releases/com/paulhoang/${projectName}/${pomVersion}/${projectName}-${pomVersion}.jar"'
       echo 'Download comeplete'
 
       echo 'Building docker image....'
-      def dockerImage = docker.build("generalmeow/reborn-service-discovery:${env.BUILD_ID}", "--build-arg APP_VERSION=${pomVersion} .")
+      def dockerImage = docker.build("generalmeow/${projectName}:${env.BUILD_ID}", ".")
 
       echo 'Pushing Docker Image....'
-      docker.withRegistry('https://registry.hub.docker.com', 'hub.docker'){
+      docker.withRegistry('https://registry.hub.docker.com', 'generalmeow-dockerhub'){
         dockerImage.push()
       }
     }
