@@ -10,10 +10,12 @@ kind: Service              # A service.
 metadata:
   name: reborn-service-discovery-lb
 spec:
-  type: LoadBalancer       # Specification type, we choose LoadBalancer because we want to balance the load between the pods.
+  type: NodePort           # Loadbalancer uses your cloud providers LB (allows ext access)
+                           # NodePort exposes the all of the node IPs onto a static port to access via (allows ext access)
+                           # ClusterIP, default exposes pods internally only
   ports:
   - port: 80               # Specifies the port in which the service gets requests
     protocol: TCP          # Defines the communication
-    targetPort: 8761         # The port at which incomming requests are forwarded
+    targetPort: 8761       # The port at which incomming requests are forwarded
   selector:                # Object that contains properties for selecting pods
     app: reborn-service-discovery       # sa-frontend Defines which pods to target, only pods that are labeled with “app: sa-frontend”
