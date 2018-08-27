@@ -4,7 +4,7 @@ node {
   echo sh(script: 'env|sort', returnStdout: true)
   checkout scm
   docker.image('generalmeow/jenkins-tools:1.6')
-        .inside('-v /home/paul/work/docker/docker-maven-repo:/root/.m2/repository') {
+        .inside('--network host -v /home/paul/work/docker/docker-maven-repo:/root/.m2/repository') {
 
     stage ('Initialize') {
       //sh '''
@@ -47,12 +47,12 @@ node {
       def dockerImage = docker.build("${dockerRegistry}/generalmeow/${projectName}:${env.BUILD_ID}", ".")
 
       echo 'Pushing Docker Image....'
-      docker.withRegistry('https://registry.hub.docker.com', 'generalmeow-dockerhub'){
+//      docker.withRegistry('https://registry.hub.docker.com', 'generalmeow-dockerhub'){
         dockerImage.push()
-      }
+//      }
     }
-    stage('Deploy Docker Image') {
-      echo 'Deploying Docker Image....'
-    }
+//    stage('Deploy Docker Image') {
+//      echo 'Deploying Docker Image....'
+//    }
   }
 }

@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66d1ff52-2897-464b-b1d3-5bb2e3014387" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Jenkinsfile-arm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8/reborn-service-discovery-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8/reborn-service-discovery-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8/reborn-service-discovery-svc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8/reborn-service-discovery-svc.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rebord-service-discovery.iml" beforeDir="false" afterPath="$PROJECT_DIR$/rebord-service-discovery.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile-arm" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile-arm" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,7 +40,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Jenkinsfile" value="16" />
+          <entry key="Jenkinsfile" value="17" />
           <entry key="Jenkinsfile-arm" value="11" />
           <entry key="java" value="19" />
           <entry key="yaml" value="445" />
@@ -52,7 +48,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="18" />
+          <entry key="Groovy" value="19" />
           <entry key="JAVA" value="19" />
           <entry key="PLAIN_TEXT" value="9" />
           <entry key="YAML" value="445" />
@@ -85,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Jenkinsfile-arm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+            <state relative-caret-position="-253">
+              <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -163,8 +159,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Jenkinsfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="38" selection-start-line="38" selection-end-line="39" />
+            <state relative-caret-position="75">
+              <caret line="6" column="32" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -193,6 +189,8 @@
     <findStrings>
       <find>build</find>
       <find>rebord</find>
+      <find>-arm</find>
+      <find>rm</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/k8</dir>
@@ -291,33 +289,7 @@
             <path>
               <item name="rebord-service-discovery" type="b2602c69:ProjectViewProjectNode" />
               <item name="reborn-service-discovery" type="462c0819:PsiDirectoryNode" />
-              <item name="k8" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rebord-service-discovery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="reborn-service-discovery" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rebord-service-discovery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="reborn-service-discovery" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rebord-service-discovery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="reborn-service-discovery" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rebord-service-discovery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="reborn-service-discovery" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="rebornservicediscovery" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="rebord-service-discovery" type="b2602c69:ProjectViewProjectNode" />
@@ -427,18 +399,18 @@
       <workItem from="1534286495105" duration="3099000" />
       <workItem from="1534843651625" duration="2281000" />
       <workItem from="1534846808596" duration="10763000" />
-      <workItem from="1535401504145" duration="109000" />
+      <workItem from="1535401504145" duration="1120000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16252000" />
+    <option name="totallyTimeSpent" value="17263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="DB Browser" order="2" />
       <window_info id="Designer" order="3" />
@@ -454,7 +426,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32824427" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32824427" />
       <window_info anchor="bottom" id="DB Execution Console" order="8" />
       <window_info anchor="bottom" id="Regex Tester" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
@@ -572,15 +544,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Jenkinsfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="38" selection-start-line="38" selection-end-line="39" />
+        <state relative-caret-position="75">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Jenkinsfile-arm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+        <state relative-caret-position="-253">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
