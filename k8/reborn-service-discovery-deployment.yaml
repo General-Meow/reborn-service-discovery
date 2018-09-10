@@ -36,11 +36,23 @@ spec:
         app: reborn-service-discovery   # app: sa-frontend the label to use for the pods created by this template.
     spec:
       containers:
-      - image: generalmeow/reborn-service-discovery:1
+      - name: reborn-service-discovery      # a list of containers in this pod
+        image: generalmeow/reborn-service-discovery:1
         imagePullPolicy: Always   # when set to Always, it will pull the container images on each redeployment.
-        name: reborn-service-discovery
         env:
         - name: AN_ENV_VARIABLE
           value: "https://THE_SERVICE_NAME" # set an env var do it will be sent to the docker container. here it uses the k8s dns to look up the ip for the service
         ports:
-        - containerPort: 8761
+          - name: sd-port
+            containerPort: 8761           # open up port 8761
+        livenessProbe:
+          httpGet:
+            port: sd-port                 # a reference to the port to access the health endpoint, here it points to the declared sd-port
+            path: /
+          initialDelaySeconds: 15         # time to wait after starting the pod to start the http checks
+          timeoutSeconds: 30              # the amount of time to wait before the http request is considered a timeout
+      nodeSelector:
+        podType: highspec                 # only run this pod spec on a node that has the label podType set to highSpec
+
+
+

@@ -14,8 +14,10 @@ spec:
                            # NodePort exposes the all of the node IPs onto a static port to access via (allows ext access)
                            # ClusterIP, default exposes pods internally only
   ports:
-  - port: 80               # Specifies the port in which the service gets requests
+  - port: 80               # The internal port number in which other pods/services can communicate with.
+                           # Service ports can only run on ports between 30000 - 32767
+    nodePort: 80           # The port that is bound to the node that is also accessible from the outside
     protocol: TCP          # Defines the communication
-    targetPort: 8761       # The port at which incomming requests are forwarded
+    targetPort: 8761       # The port at which incoming requests are forwarded to. This can also be the name of the defined port in the deployment
   selector:                # Object that contains properties for selecting pods
     app: reborn-service-discovery       # sa-frontend Defines which pods to target, only pods that are labeled with “app: sa-frontend”
