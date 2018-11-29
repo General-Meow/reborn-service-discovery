@@ -43,16 +43,19 @@ node {
       sh 'curl -o ./downloads/app.jar "http://tinker.paulhoang.com:8081/repository/maven-releases/com/paulhoang/${projectName}/${pomVersion}/${projectName}-${pomVersion}.jar"'
       echo 'Download comeplete'
 
-      echo "Building docker image.... ${dockerRegistry}/generalmeow/${projectName"
+      echo "Building docker image.... ${dockerRegistry}/generalmeow/${projectName}"
       def dockerImage = docker.build("${dockerRegistry}/generalmeow/${projectName}:${env.BUILD_ID}", ".")
 
       echo 'Pushing Docker Image....'
-//      docker.withRegistry('https://registry.hub.docker.com', 'generalmeow-dockerhub'){
+      docker.withRegistry('https://registry.hub.docker.com', 'generalmeow-dockerhub'){
         dockerImage.push()
-//      }
+      }
     }
-//    stage('Deploy Docker Image') {
-//      echo 'Deploying Docker Image....'
-//    }
+    stage('Package and push helm chart') {
+
+    }
+    stage('Deploy Docker Image') {
+      echo 'Deploying Docker Image....'
+    }
   }
 }
