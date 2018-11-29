@@ -43,7 +43,7 @@ node {
       sh 'curl -o ./downloads/app.jar "http://tinker.paulhoang.com:8081/repository/maven-releases/com/paulhoang/${projectName}/${pomVersion}/${projectName}-${pomVersion}.jar"'
       echo 'Download comeplete'
 
-      echo 'Building docker image....'
+      echo "Building docker image.... ${dockerRegistry}/generalmeow/${projectName"
       def dockerImage = docker.build("${dockerRegistry}/generalmeow/${projectName}:${env.BUILD_ID}", ".")
 
       echo 'Pushing Docker Image....'
