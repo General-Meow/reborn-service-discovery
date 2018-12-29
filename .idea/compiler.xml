@@ -13,4 +13,9 @@
       <module name="rebord-service-discovery" target="$project-sdk$" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="rebord-service-discovery" options="-parameters" />
+    </option>
+  </component>
 </project>

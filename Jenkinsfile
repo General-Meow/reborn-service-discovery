@@ -3,7 +3,7 @@
 node {
   echo sh(script: 'env|sort', returnStdout: true)
   checkout scm
-  docker.image('generalmeow/jenkins-tools:1.6')
+  docker.image('generalmeow/jenkins-tools:1.7')
         .inside('--network host -v /home/paul/work/docker/docker-maven-repo:/root/.m2/repository') {
 
     stage ('Initialize') {
@@ -51,11 +51,17 @@ node {
         dockerImage.push()
       }
     }
+    stage('Deploy to k8s') {
+          sh 'kubectl run service-discovery --image="generalmeow/${projectName}:${env.BUILD_ID}" --replicas=2'
+        }
+    /*
     stage('Package and push helm chart') {
-
+      sh 'cd reborn-service-discovery-chart'
+      sh 'helm package .'
     }
-    stage('Deploy Docker Image') {
-      echo 'Deploying Docker Image....'
+    stage('Deploy to k8s dev') {
+      echo 'Deploying Chart....'
     }
+    */
   }
 }
