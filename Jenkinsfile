@@ -52,7 +52,7 @@ node {
       }
     }
     stage('Deploy to k8s') {
-          sh 'kubectl run service-discovery --image="generalmeow/${projectName}:${env.BUILD_ID}" --replicas=2'
+          sh "kubectl run service-discovery --image=generalmeow/${projectName}:${env.BUILD_ID} --replicas=2"
         }
     /*
     stage('Package and push helm chart') {
