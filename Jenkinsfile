@@ -6,6 +6,11 @@ node {
   docker.image('generalmeow/jenkins-tools:1.7')
         .inside('--network host -v /home/paul/work/docker/docker-maven-repo:/root/.m2/repository') {
 
+    pom = readMavenPom file: 'pom.xml'
+    def pomVersion = pom.version
+    def projectName = 'reborn-service-discovery'
+    def dockerRegistry = 'localhost:5000'
+
     stage ('Initialize') {
       //sh '''
       //'''
@@ -32,11 +37,6 @@ node {
     }
     stage('Build and Publish Docker Image') {
       echo 'downloading artifacts from nexus....'
-      pom = readMavenPom file: 'pom.xml'
-
-      def pomVersion = pom.version
-      def projectName = 'reborn-service-discovery'
-      def dockerRegistry = 'localhost:5000'
 
       sh 'mkdir -p ./downloads'
       //server.download(downloadSpec)
