@@ -55,12 +55,8 @@ node {
     }
     stage('Deploy to k8s') {
           def deploymentExists = sh "kubectl get deployments ${projectName} --no-headers | wc -l"
-          if(deploymentExists == 'No resources found.') {
-            sh 'kubectl create -f k8/reborn-service-discovery-deployment.yaml'
-          }
-          else {
-            sh 'kubectl apply -f k8/reborn-service-discovery-deployment.yaml --record'
-          }
+          sh 'kubectl apply -f k8/reborn-service-discovery-deployment.yaml --record'
+          sh 'kubectl apply -f k8/reborn-service-discovery-svc.yaml --record'
         }
     /*
     stage('Package and push helm chart') {
