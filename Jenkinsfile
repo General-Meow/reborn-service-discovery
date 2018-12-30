@@ -42,7 +42,7 @@ node {
       //server.download(downloadSpec)
       def downloadUrl = "http://tinker.paulhoang.com:8081/repository/maven-releases/com/paulhoang/${projectName}/${pomVersion}/${projectName}-${pomVersion}.jar"
       echo 'downloading from "${downloadUrl}"'
-      sh 'curl -o ./downloads/app.jar "${downloadUrl}"'
+      sh 'curl -o ./downloads/app.jar ' + downloadUrl
       echo 'Download complete'
 
       echo "Building docker image.... generalmeow/${projectName}"
