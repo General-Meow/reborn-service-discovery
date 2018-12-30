@@ -57,10 +57,10 @@ node {
           def deploymentExists = sh "kubectl get deployments ${projectName} --no-headers | wc -l"
           sh 'cd k8'
           if(deploymentExists == 'No resources found.') {
-            sh 'kubectl create -f reborn-serrvice-discovery-deployment.yaml'
+            sh 'kubectl create -f reborn-service-discovery-deployment.yaml'
           }
           else {
-            sh 'kubectl apply -f reborn-serrvice-discovery-deployment.yaml --record'
+            sh 'kubectl apply -f reborn-service-discovery-deployment.yaml --record'
           }
         }
     /*
