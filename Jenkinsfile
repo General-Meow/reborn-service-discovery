@@ -55,6 +55,8 @@ node {
     }
     stage('Deploy to k8s') {
           def deploymentExists = sh "kubectl get deployments ${projectName} --no-headers | wc -l"
+          echo 'blah'
+          echo pwd()
           sh 'cd k8'
           if(deploymentExists == 'No resources found.') {
             sh 'kubectl create -f reborn-service-discovery-deployment.yaml'
