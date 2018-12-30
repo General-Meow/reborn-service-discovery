@@ -54,7 +54,14 @@ node {
       }
     }
     stage('Deploy to k8s') {
-          sh "kubectl run service-discovery --image=generalmeow/${projectName}:${env.BUILD_ID} --replicas=2"
+          def deploymentExists = sh "kubectl get deployments "${projectName}" --no-headers | wc -l'
+          sh 'cd k8'
+          if(deploymentExists == 'No resources found.') {
+            sh 'kubectl create -f reborn-serrvice-discovery-deployment.yaml'
+          }
+          else {
+            sh 'kubectl apply -f reborn-serrvice-discovery-deployment.yaml --record'
+          }
         }
     /*
     stage('Package and push helm chart') {
