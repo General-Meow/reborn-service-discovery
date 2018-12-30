@@ -40,8 +40,10 @@ node {
 
       sh 'mkdir -p ./downloads'
       //server.download(downloadSpec)
-      sh 'curl -o ./downloads/app.jar "http://tinker.paulhoang.com:8081/repository/maven-releases/com/paulhoang/${projectName}/${pomVersion}/${projectName}-${pomVersion}.jar"'
-      echo 'Download comeplete'
+      def downloadUrl = "http://tinker.paulhoang.com:8081/repository/maven-releases/com/paulhoang/${projectName}/${pomVersion}/${projectName}-${pomVersion}.jar"
+      echo 'downloading from "${downloadUrl}"'
+      sh 'curl -o ./downloads/app.jar "${downloadUrl}"'
+      echo 'Download complete'
 
       echo "Building docker image.... generalmeow/${projectName}"
       def dockerImage = docker.build("generalmeow/${projectName}:${env.BUILD_ID}", ".")

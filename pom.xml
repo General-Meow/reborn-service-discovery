@@ -5,7 +5,7 @@
 
 	<groupId>com.paulhoang</groupId>
 	<artifactId>reborn-service-discovery</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>reborn-service-discovery</name>
