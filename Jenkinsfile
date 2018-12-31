@@ -46,7 +46,7 @@ node {
       echo 'Download complete'
 
       echo "Building docker image.... generalmeow/${projectName}"
-      def dockerImage = docker.build("generalmeow/${projectName}:${env.BUILD_ID}", ".")
+      def dockerImage = docker.build("generalmeow/${projectName}:${pomVersion}", ".")
 
       echo 'Pushing Docker Image....'
       docker.withRegistry('https://registry.hub.docker.com', 'generalmeow-dockerhub'){
