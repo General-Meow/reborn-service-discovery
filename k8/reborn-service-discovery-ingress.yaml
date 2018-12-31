@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: reborn-service-discovery-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: k8smaster
+      http:
+        paths:
+          - path: /sd
+            backend:
+              serviceName: reborn-service-discovery-lb
+              servicePort: 80
+#          - path: /bar
+#            backend:
+#              serviceName: service2
+#              servicePort: 8080
