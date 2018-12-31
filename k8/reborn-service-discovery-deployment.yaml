@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: reborn-service-discovery      # a list of containers in this pod
-        image: generalmeow/reborn-service-discovery:0.03
+        image: generalmeow/reborn-service-discovery:0.0.3
         imagePullPolicy: Always   # when set to Always, it will pull the container images on each redeployment.
         env:
         - name: AN_ENV_VARIABLE
