@@ -8,7 +8,7 @@ apiVersion: v1
 kind: Service              # A service.
 
 metadata:
-  name: reborn-service-discovery-lb
+  name: reborn-service-discovery-service
 spec:
   type: NodePort           # Loadbalancer uses your cloud providers LB (allows ext access)
                            # NodePort exposes the all of the node IPs onto a static port to access via (allows ext access)
