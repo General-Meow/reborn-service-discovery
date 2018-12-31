@@ -51,8 +51,8 @@ spec:
             path: /
           initialDelaySeconds: 15         # time to wait after starting the pod to start the http checks
           timeoutSeconds: 30              # the amount of time to wait before the http request is considered a timeout
-      nodeSelector:
-        podType: highspec                 # only run this pod spec on a node that has the label podType set to highSpec
+#      nodeSelector:
+#        podType: highspec                 # only run this pod spec on a node that has the label podType set to highSpec
 
 
 
