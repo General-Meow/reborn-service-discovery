@@ -58,6 +58,7 @@ node {
           sh 'kubectl apply -f k8/reborn-service-discovery-deployment.yaml --record'
           sh 'kubectl apply -f k8/reborn-service-discovery-svc.yaml --record'
           sh 'kubectl apply -f k8/reborn-service-discovery-ingress.yaml --record'
+          sh 'kubectl apply -f k8/reborn-service-discovery-ingress-service.yaml --record'
         }
     /*
     stage('Package and push helm chart') {
