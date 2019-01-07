@@ -9,11 +9,11 @@
 apiVersion: apps/v1
 kind: Deployment    # A deployment.
 metadata:
-  name: reborn-service-discovery
+  name: reborn-service-discovery-deployment
 spec:
   selector:
     matchLabels:
-      app: reborn-service-discovery
+      app: reborn-service-discovery-deployment
   replicas: 2       # is a property of the deployments Spec object that defines how many pods we want to run. So only 2.
   minReadySeconds: 15
   strategy:
@@ -33,10 +33,10 @@ spec:
     # Most likely the resemblance with Pods struck you immediately.
     metadata:
       labels:
-        app: reborn-service-discovery   # app: sa-frontend the label to use for the pods created by this template.
+        app: reborn-service-discovery-deployment   # app: sa-frontend the label to use for the pods created by this template.
     spec:
       containers:
-      - name: reborn-service-discovery      # a list of containers in this pod
+      - name: reborn-service-discovery-pod      # a list of containers in this pod
         image: generalmeow/reborn-service-discovery:0.0.3
         imagePullPolicy: Always   # when set to Always, it will pull the container images on each redeployment.
         env:
