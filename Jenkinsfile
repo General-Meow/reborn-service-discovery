@@ -3,7 +3,7 @@
 node {
   echo sh(script: 'env|sort', returnStdout: true)
   checkout scm
-  docker.image('generalmeow/jenkins-tools:1.7')
+  docker.image('generalmeow/jenkins-tools:1.8')
         .inside('--network host -v /home/paul/work/docker/docker-maven-repo:/root/.m2/repository') {
 
     pom = readMavenPom file: 'pom.xml'
