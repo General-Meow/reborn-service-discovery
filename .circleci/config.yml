@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - checkout
-
+      - run: mvn clean
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -38,4 +38,10 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn integration-test
+      - run: mvn test
+
+  deploy:
+    docker:
+      image: circleci/openjdk:8-jdk
+      steps:
+        - run: echo "success!"
