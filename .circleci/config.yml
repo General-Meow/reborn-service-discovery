@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -42,7 +42,7 @@ jobs:
 
   deploy:
     docker:
-      image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk
     steps:
       - run: echo "success!"
 
@@ -51,5 +51,5 @@ workflows:
   version: 2.1
   build-and-deploy:
     jobs:
-      - build:
-      - deploy:
+      - build
+      - deploy
