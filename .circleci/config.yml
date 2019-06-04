@@ -45,3 +45,11 @@ jobs:
       image: circleci/openjdk:8-jdk
     steps:
       - run: echo "success!"
+
+
+workflows:
+  version: 2.1
+  build-and-deploy:
+    jobs:
+      - build:
+      - deploy:
