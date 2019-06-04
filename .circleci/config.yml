@@ -44,4 +44,4 @@ jobs:
     docker:
       image: circleci/openjdk:8-jdk
       steps:
-        run: echo "success!"
+        - run: echo "success!"
