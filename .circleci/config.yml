@@ -65,6 +65,8 @@ jobs:
   build:
     executor: my-docker-env
     steps:
+      - attach_workspace:
+          at: /tmp/working-directory
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
