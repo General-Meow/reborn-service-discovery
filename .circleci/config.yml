@@ -98,23 +98,24 @@ workflows:
     jobs:
       - static-analysis
       - security-checks
-      - build:
+      - unit-tests:
           requires:
             - static-analysis
             - security-checks
-          filters:
-            branches:
-              only: master
-      - unit-tests:
-          requires:
-            - build
       - integration-tests:
           requires:
-            - build
-      - dockerise-push:
+            - static-analysis
+            - security-checks
+      - build:
           requires:
             - unit-tests
             - integration-tests
+          filters:
+            branches:
+                only: master
+      - dockerise-push:
+          requires:
+            - build
       - deploy-to-dev:
           requires:
             - dockerise-push
