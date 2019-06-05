@@ -10,7 +10,7 @@ executors:
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
-    working_directory: ~/working-directory
+    working_directory: /working-directory
 
 jobs:
   checkout:
@@ -18,10 +18,19 @@ jobs:
 
     steps:
       - checkout
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: /working-directory
+          # Must be relative path from root
+          paths:
+            - ./
 
   static-analysis:
     executor: my-docker-env
     steps:
+      - attach_workspace:
+          at: /working-directory
       - run: 'echo analyse!'
   security-checks:
     executor: my-docker-env
@@ -30,7 +39,8 @@ jobs:
   unit-tests:
     executor: my-docker-env
     steps:
-
+      - attach_workspace:
+          at: /working-directory
       - run: mvn clean
       # Download and cache dependencies
       - restore_cache:
