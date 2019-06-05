@@ -17,9 +17,8 @@ jobs:
     executor: my-docker-env
     steps:
       - run: 'echo looking at dependencies against OWASP'
-  build:
+  unit-tests:
     executor: my-docker-env
-
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -50,14 +49,23 @@ jobs:
 
       # run tests!
       - run: mvn test
-  unit-tests:
-    executor: my-docker-env
-    steps:
-      - run: "echo test!"
   integration-tests:
     executor: my-docker-env
     steps:
       - run: "echo integration test!"
+  build:
+    executor: my-docker-env
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: mvn package
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
   dockerise-push:
     executor: my-docker-env
     steps:
