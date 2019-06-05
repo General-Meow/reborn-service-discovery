@@ -129,7 +129,7 @@ workflows:
             - approve-to-stage
       - approve-to-prod:
           type: approval
-          requiers:
+          requires:
             - deploy-to-stage
       - deploy-to-prod:
           requires:
