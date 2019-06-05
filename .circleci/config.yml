@@ -81,6 +81,8 @@ jobs:
     executor: my-docker-env
     steps:
       - run: 'echo dockerise!'
+      - run: 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
+      - run: 'docker build -t generalmeow/reborn-service-discovery'
       - run: 'echo push to registry'
   deploy-to-dev:
     executor: my-docker-env
@@ -130,6 +132,7 @@ workflows:
             branches:
                 only: master
       - dockerise-push:
+          context: com.fluffymango
           requires:
             - build
       - deploy-to-dev:
