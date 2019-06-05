@@ -101,6 +101,9 @@ workflows:
           requires:
             - static-analysis
             - security-checks
+          filters:
+            branches:
+              only: master
       - unit-tests:
           requires:
             - build
