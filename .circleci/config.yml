@@ -76,9 +76,21 @@ workflows:
   build-and-deploy:
     jobs:
       - static-analysis
-      - build
-      - test
-      - dockerise-push
-      - deploy-to-dev
-      - deploy-to-int
-      - deploy-to-stage
+      - build:
+          requires:
+            - static-analysis
+      - test:
+          requires:
+            - build
+      - dockerise-push:
+          requires:
+            - test
+      - deploy-to-dev:
+          requires:
+            - dockerise-push
+      - deploy-to-int:
+          requires:
+            - deploy-to-dev
+      - deploy-to-stage:
+          requires:
+            - deploy-to-int
