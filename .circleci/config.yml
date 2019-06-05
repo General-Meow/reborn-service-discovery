@@ -9,6 +9,11 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - run: 'echo analyse!'
+  security-checks:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo looking at dependencies against OWASP'
   build:
     docker:
       # specify the version you desire here
@@ -44,11 +49,16 @@ jobs:
 
       # run tests!
       - run: mvn test
-  test:
+  unit-tests:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
       - run: "echo test!"
+  integration-tests:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: "echo integration test!"
   dockerise-push:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -65,32 +75,62 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - run: 'echo deploying to int!'
+  e2e-tests:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo running e2e tests!'
   deploy-to-stage:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
       - run: 'echo deploying to stage!'
+  deploy-to-prod:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo deploying to prod!'
 
 workflows:
   version: 2.1
   build-and-deploy:
     jobs:
       - static-analysis
+      - security-checks
       - build:
           requires:
             - static-analysis
-      - test:
+            - security-checks
+      - unit-tests:
+          requires:
+            - build
+      - integration-tests:
           requires:
             - build
       - dockerise-push:
           requires:
-            - test
+            - unit-tests
+            - integration-tests
       - deploy-to-dev:
           requires:
             - dockerise-push
       - deploy-to-int:
           requires:
             - deploy-to-dev
-      - deploy-to-stage:
+      - e2e-tests:
           requires:
             - deploy-to-int
+      - approve-to-stage:
+          type: approval
+          requiers:
+            - e2e-tests
+      - deploy-to-stage:
+          requires:
+            - approve-to-stage
+      - approve-to-prod:
+          type: approval
+          requiers:
+            - deploy-to-stage
+      - deploy-to-prod:
+          requires:
+            - approve-to-prod
