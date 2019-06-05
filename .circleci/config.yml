@@ -4,6 +4,11 @@
 #
 version: 2.1
 jobs:
+  static-analysis:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo analyse!'
   build:
     docker:
       # specify the version you desire here
@@ -39,17 +44,41 @@ jobs:
 
       # run tests!
       - run: mvn test
-
-  deploy:
+  test:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
-      - run: echo "success!"
-
+      - run: "echo test!"
+  dockerise-push:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo dockerise!'
+      - run: 'echo push to registry'
+  deploy-to-dev:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo deploying to dev!'
+  deploy-to-int:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo deploying to int!'
+  deploy-to-stage:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: 'echo deploying to stage!'
 
 workflows:
   version: 2.1
   build-and-deploy:
     jobs:
+      - static-analysis
       - build
-      - deploy
+      - test
+      - dockerise-push
+      - deploy-to-dev
+      - deploy-to-int
+      - deploy-to-stage
