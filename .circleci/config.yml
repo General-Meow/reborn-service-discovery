@@ -3,21 +3,22 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2.1
+executors:
+  my-docker-env:
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+
 jobs:
   static-analysis:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo analyse!'
   security-checks:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo looking at dependencies against OWASP'
   build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk-stretch
+    executor: my-docker-env
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -34,60 +35,52 @@ jobs:
       - checkout
       - run: mvn clean
       # Download and cache dependencies
-#      - restore_cache:
-#          keys:
-#            - v1-dependencies-{{ checksum "pom.xml" }}
-#            # fallback to using the latest cache if no exact match is found
-#            - v1-dependencies-
-#
-#      - run: mvn dependency:go-offline
-#
-#      - save_cache:
-#          paths:
-#            - ~/.m2
-#          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn -X test
+      - run: mvn test
   unit-tests:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: "echo test!"
   integration-tests:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: "echo integration test!"
   dockerise-push:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo dockerise!'
       - run: 'echo push to registry'
   deploy-to-dev:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo deploying to dev!'
   deploy-to-int:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo deploying to int!'
   e2e-tests:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo running e2e tests!'
   deploy-to-stage:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo deploying to stage!'
   deploy-to-prod:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: my-docker-env
     steps:
       - run: 'echo deploying to prod!'
 
