@@ -94,6 +94,7 @@
 	</repositories>
 
 	<build>
+    <finalName>reborn-service-discovery</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
