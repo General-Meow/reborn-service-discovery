@@ -24,7 +24,7 @@ jobs:
           root: /tmp/working-directory
           # Must be relative path from root
           paths:
-            - ./
+            - ./**/*
       - run: 'ls'
       - run: 'pwd'
 
@@ -150,23 +150,25 @@ workflows:
       - deploy-to-dev:
           requires:
             - dockerise-push
-      - deploy-to-int:
-          requires:
-            - deploy-to-dev
-      - e2e-tests:
-          requires:
-            - deploy-to-int
-      - approve-to-stage:
-          type: approval
-          requires:
-            - e2e-tests
-      - deploy-to-stage:
-          requires:
-            - approve-to-stage
-      - approve-to-prod:
-          type: approval
-          requires:
-            - deploy-to-stage
-      - deploy-to-prod:
-          requires:
-            - approve-to-prod
+
+#ONLY IMPLEMENT THIS IS THE FUTURE
+#      - deploy-to-int:
+#          requires:
+#            - deploy-to-dev
+#      - e2e-tests:
+#          requires:
+#            - deploy-to-int
+#      - approve-to-stage:
+#          type: approval
+#          requires:
+#            - e2e-tests
+#      - deploy-to-stage:
+#          requires:
+#            - approve-to-stage
+#      - approve-to-prod:
+#          type: approval
+#          requires:
+#            - deploy-to-stage
+#      - deploy-to-prod:
+#          requires:
+#            - approve-to-prod
