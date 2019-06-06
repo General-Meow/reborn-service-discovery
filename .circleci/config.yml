@@ -24,7 +24,8 @@ jobs:
           root: /tmp/working-directory
           # Must be relative path from root
           paths:
-            - ./**/*
+            - ./
+            - ./target
       - run: 'ls'
       - run: 'pwd'
 
