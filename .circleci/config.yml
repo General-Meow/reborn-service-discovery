@@ -83,6 +83,15 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: /tmp/working-directory
+          # Must be relative path from root
+          paths:
+            - ./
+            - ./target
+
   dockerise-push:
     executor: my-docker-env
     steps:
