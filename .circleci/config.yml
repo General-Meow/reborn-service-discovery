@@ -84,10 +84,7 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
           root: /tmp/working-directory
-          # Must be relative path from root
           paths:
             - ./
             - ./target
@@ -104,8 +101,10 @@ jobs:
           docker_layer_caching: true
       - run: 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
       - run: 'docker build -t generalmeow/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM .'
+      - run: 'docker tag generalmeow/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM generalmeow/$CIRCLE_PROJECT_REPONAME:latest'
       - run: 'echo push to registry'
       - run: 'docker push generalmeow/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM'
+      - run: 'docker push generalmeow/$CIRCLE_PROJECT_REPONAME:latest'
   deploy-to-dev:
     executor: my-docker-env
     steps:
