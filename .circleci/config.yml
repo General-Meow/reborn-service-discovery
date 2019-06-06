@@ -75,6 +75,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: mvn -DskipTests package
+      - run: cp target/$$CIRCLE_PROJECT_REPONAME* target/app.jar
       - save_cache:
           paths:
             - ~/.m2
@@ -90,9 +91,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
-      - run: 'docker build -t generalmeow/reborn-service-discovery:latest .'
+      - run: 'docker build -t generalmeow/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM .'
       - run: 'echo push to registry'
-      - run: 'docker push generalmeow/reborn-service-discovery:latest'
+      - run: 'docker push generalmeow/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM'
   deploy-to-dev:
     executor: my-docker-env
     steps:
