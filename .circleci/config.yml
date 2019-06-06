@@ -25,6 +25,8 @@ jobs:
           # Must be relative path from root
           paths:
             - ./
+      - run: 'ls'
+      - run: 'pwd'
 
   static-analysis:
     executor: my-docker-env
