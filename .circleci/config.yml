@@ -76,7 +76,8 @@ jobs:
             - v1-dependencies-
       - run: ls
       - run: mvn -DskipTests package
-      - run: 'cp ./target/$CIRCLE_PROJECT_REPONAME* ./target/app.jar'
+      - run: ls ./target
+      - run: 'cp ./target/$CIRCLE_PROJECT_REPONAME.jar ./target/app.jar'
       - save_cache:
           paths:
             - ~/.m2
