@@ -87,9 +87,12 @@ jobs:
       - run: 'echo dockerise!'
       - run: 'pwd'
       - run: 'ls'
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run: 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
-      - run: 'docker build -t generalmeow/reborn-service-discovery .'
+      - run: 'docker build -t generalmeow/reborn-service-discovery:latest .'
       - run: 'echo push to registry'
+      - run: 'docker push generalmeow/reborn-service-discovery:latest'
   deploy-to-dev:
     executor: my-docker-env
     steps:
