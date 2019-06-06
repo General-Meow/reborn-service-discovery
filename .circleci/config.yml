@@ -72,7 +72,7 @@ jobs:
             - v1-dependencies-{{ checksum "pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: mvn package
+      - run: mvn -DskipTests package
       - save_cache:
           paths:
             - ~/.m2
@@ -82,7 +82,7 @@ jobs:
     steps:
       - run: 'echo dockerise!'
       - run: 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
-      - run: 'docker build -t generalmeow/reborn-service-discovery'
+      - run: 'docker build -t generalmeow/reborn-service-discovery .'
       - run: 'echo push to registry'
   deploy-to-dev:
     executor: my-docker-env
