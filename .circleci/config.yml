@@ -74,8 +74,9 @@ jobs:
             - v1-dependencies-{{ checksum "pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run: ls
       - run: mvn -DskipTests package
-      - run: cp target/$CIRCLE_PROJECT_REPONAME* target/app.jar
+      - run: 'cp ./target/$CIRCLE_PROJECT_REPONAME* ./target/app.jar'
       - save_cache:
           paths:
             - ~/.m2
