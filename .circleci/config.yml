@@ -104,7 +104,7 @@ jobs:
       - run: 'echo deploying to dev!'
       - add_ssh_keys:
           fingerprints:
-            - "5e:57:96:91:19:df:02:a1:c6:b3:98:40:22:e9:58:d5"
+            - "46:fe:28:45:a0:22:5d:41:f5:6d:5b:b9:ba:02:4c:b4"
       - run: ssh paul@paulhoang.com -p 2222
       - run: 'touch /tmp/derp'
       - run: 'exit'
