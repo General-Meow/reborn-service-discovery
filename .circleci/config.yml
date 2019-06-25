@@ -102,7 +102,7 @@ jobs:
     executor: my-docker-env
     steps:
       - run: 'echo deploying to dev!'
-      - run: ssh paul@fluffymango.com
+      - run: ssh paul@fluffymango.com -p 2222
       - run: 'touch /tmp/derp'
   deploy-to-int:
     executor: my-docker-env
