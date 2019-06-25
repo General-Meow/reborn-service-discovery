@@ -102,6 +102,7 @@ jobs:
     executor: my-docker-env
     steps:
       - run: 'echo deploying to dev!'
+      - run: ssh-keyscan -H paulhoang.com >> ~/.ssh/known_hosts
       - run: ssh paul@paulhoang.com -p 2222
       - run: 'touch /tmp/derp'
       - run: 'exit'
