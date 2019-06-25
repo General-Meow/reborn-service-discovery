@@ -102,9 +102,9 @@ jobs:
     executor: my-docker-env
     steps:
       - run: 'echo deploying to dev!'
-      - add_ssh_keys:
-          fingerprints:
-            - "46:fe:28:45:a0:22:5d:41:f5:6d:5b:b9:ba:02:4c:b4"
+      - run: mkdir -p ~/.ssh
+      - run: touch ~/.ssh/known_hosts
+      - run: echo '[paulhoang.com]:2222,[90.254.33.82]:2222 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMhSgOBF6qiiZ0oA15PhtcF0WLCgdgJRmWWrmABz4tOFNqmJLdLCf7S3jgV/sPtBwk6T4bbSKerZiGwNGVTlXrU=' >> ~/.ssh/known_hosts
       - run: ssh paul@paulhoang.com -p 2222
       - run: 'touch /tmp/derp'
       - run: 'exit'
