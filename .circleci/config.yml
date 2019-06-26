@@ -104,7 +104,7 @@ jobs:
       - run: 'echo deploying to dev!'
       - run: mkdir -p ~/.ssh
       - run: ssh-keyscan -p 2222 paulhoang.com >> ~/.ssh/known_hosts
-      - run: ssh -t paul@paulhoang.com -p 2222 "/usr/bin/bash -l"
+      - run: ssh -t paul@paulhoang.com -p 2222 "/bin/bash -l"
       - run: 'touch /tmp/derp'
       - run: 'exit'
   deploy-to-int:
