@@ -104,7 +104,7 @@ jobs:
       - run: 'echo deploying to dev!'
       - run: mkdir -p ~/.ssh
       - run: ssh-keyscan -p 2222 paulhoang.com >> ~/.ssh/known_hosts
-      - run: ssh -t paul@paulhoang.com -p 2222 "/bin/bash -l && touch /tmp/derp && exit"
+      - run: ssh -t paul@paulhoang.com -p 2222 'touch /tmp/derp.txt'
   deploy-to-int:
     executor: my-docker-env
     steps:
