@@ -103,9 +103,8 @@ jobs:
     steps:
       - run: 'echo deploying to dev!'
       - run: mkdir -p ~/.ssh
-      - run: touch ~/.ssh/known_hosts
-      - run: echo '[paulhoang.com]:2222,[90.254.33.82]:2222 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMhSgOBF6qiiZ0oA15PhtcF0WLCgdgJRmWWrmABz4tOFNqmJLdLCf7S3jgV/sPtBwk6T4bbSKerZiGwNGVTlXrU=' >> ~/.ssh/known_hosts
-      - run: ssh paul@paulhoang.com -p 2222
+      - run: ssh-keyscan -p 2222 paulhoang.com >> ~/.ssh/known_hosts
+      - run: ssh -t paul@paulhoang.com -p 2222 "/usr/bin/bash -l"
       - run: 'touch /tmp/derp'
       - run: 'exit'
   deploy-to-int:
