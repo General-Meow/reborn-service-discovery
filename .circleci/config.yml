@@ -104,7 +104,7 @@ jobs:
       - run: 'echo deploying to dev!'
       - run: mkdir -p ~/.ssh
       - run: ssh-keyscan -p 2222 paulhoang.com >> ~/.ssh/known_hosts
-      - run: ssh paul@paulhoang.com -p 2222 'mkdir -p ~/workspace && cd ~/workspace && git -C reborn-service-discovery pull || git clone --quiet https://github.com/General-Meow/reborn-service-discovery.git && cd reborn-service-discovery/k8 && kubectl apply -f reborn-service-discovery-svc.yaml --record'
+      - run: ssh paul@paulhoang.com -p 2222 'mkdir -p ~/workspace && cd ~/workspace && git -C reborn-service-discovery pull || git clone https://github.com/General-Meow/reborn-service-discovery.git && cd reborn-service-discovery/k8 && kubectl apply -f reborn-service-discovery-svc.yaml --record && kubectl apply -f reborn-service-discovery-deployment.yaml'
   deploy-to-int:
     executor: my-docker-env
     steps:

@@ -10,7 +10,7 @@ kind: Service              # A service.
 metadata:
   name: reborn-service-discovery-service
 spec:
-  type: NodePort           # Loadbalancer uses your cloud providers LB (allows ext access)
+  type: Loadbalancer       # Loadbalancer uses your cloud providers LB (allows ext access)
                            # NodePort exposes the all of the node IPs onto a static port to access via (allows ext access)
                            # ClusterIP, default exposes pods internally only
   ports:
@@ -22,6 +22,4 @@ spec:
     targetPort: 8761       # The port at which incoming requests are forwarded to. This can also be the name of the defined port in the deployment
   selector:                # Object that contains properties for selecting pods
     app: reborn-service-discovery-deployment       # sa-frontend Defines which pods to target, only pods that are labeled with “app: sa-frontend”
-  externalIPs:
-    - 192.168.1.83
 
