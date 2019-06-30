@@ -10,7 +10,7 @@ kind: Service              # A service.
 metadata:
   name: reborn-service-discovery-service
 spec:
-  type: Loadbalancer       # Loadbalancer uses your cloud providers LB (allows ext access)
+  type: LoadBalancer       # LoadBalancer uses your cloud providers LB (allows ext access)
                            # NodePort exposes the all of the node IPs onto a static port to access via (allows ext access)
                            # ClusterIP, default exposes pods internally only
   ports:
