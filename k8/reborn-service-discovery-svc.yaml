@@ -22,4 +22,3 @@ spec:
     targetPort: 8761       # The port at which incoming requests are forwarded to. This can also be the name of the defined port in the deployment
   selector:                # Object that contains properties for selecting pods
     app: reborn-service-discovery-deployment       # sa-frontend Defines which pods to target, only pods that are labeled with “app: sa-frontend”
-
